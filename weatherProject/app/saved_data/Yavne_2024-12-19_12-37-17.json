@@ -1,0 +1,49 @@
+{
+    "location": "Yavne",
+    "country": "Israel",
+    "forecast": [
+        {
+            "date": "2024-12-19",
+            "day_temp": 22.0,
+            "humidity": 47.5,
+            "night_temp": 7.0
+        },
+        {
+            "date": "2024-12-20",
+            "day_temp": 16.6,
+            "humidity": 84.2,
+            "night_temp": 12.5
+        },
+        {
+            "date": "2024-12-21",
+            "day_temp": 19.2,
+            "humidity": 82.0,
+            "night_temp": 12.4
+        },
+        {
+            "date": "2024-12-22",
+            "day_temp": 19.4,
+            "humidity": 71.6,
+            "night_temp": 12.6
+        },
+        {
+            "date": "2024-12-23",
+            "day_temp": 18.7,
+            "humidity": 66.5,
+            "night_temp": 10.7
+        },
+        {
+            "date": "2024-12-24",
+            "day_temp": 17.7,
+            "humidity": 67.0,
+            "night_temp": 14.5
+        },
+        {
+            "date": "2024-12-25",
+            "day_temp": 19.5,
+            "humidity": 52.0,
+            "night_temp": 14.9
+        }
+    ],
+    "saved_at": "2024-12-19 12:37:17"
+}

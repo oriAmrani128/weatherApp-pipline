@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- Basic Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ <style>
+        body {
+            background-color: {{background_color }}; /* צבע הרקע מגיע מהשרת */
+        }
+    </style>
+</head>
+<body >
+    <div class="container mt-5">
+        <h1 class="text-center">Weather Forecast</h1>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/results" method="POST" class="mt-4">
+            <div class="mb-3">
+                <label for="location" class="form-label">Enter a City or Country:</label>
+                <input type="text" id="location" name="location" class="form-control" placeholder="City or Country" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Forecast</button>
+        </form>
+        
+        <form action="/download_sky_image" method="GET" class="mt-4">
+            <button type="submit" class="btn btn-secondary">Download Sky Image</button>
+        </form>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

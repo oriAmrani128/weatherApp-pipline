@@ -1,0 +1,130 @@
+2024-11-13 11:28:23,509 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-11-13 11:28:23,511 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-11-13 11:28:23,512 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-11-13 11:28:23,513 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-11-13 11:28:23,513 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-11-13 11:28:23,514 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-11-13 11:28:23,514 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-11-13 11:28:23,516 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-11-13 11:28:23,516 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-11-13 11:28:23,516 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-11-13 11:28:23,516 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-11-13 11:28:23,529 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/boto3/data/dynamodb/2012-08-10/resources-1.json
+2024-11-13 11:28:23,532 - DEBUG - IMDS ENDPOINT: http://169.254.169.254/
+2024-11-13 11:28:23,533 - DEBUG - Looking for credentials via: env
+2024-11-13 11:28:23,533 - DEBUG - Looking for credentials via: assume-role
+2024-11-13 11:28:23,533 - DEBUG - Looking for credentials via: assume-role-with-web-identity
+2024-11-13 11:28:23,533 - DEBUG - Looking for credentials via: sso
+2024-11-13 11:28:23,533 - DEBUG - Looking for credentials via: shared-credentials-file
+2024-11-13 11:28:23,534 - INFO - Found credentials in shared credentials file: ~/.aws/credentials
+2024-11-13 11:28:23,536 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2024-11-13 11:28:23,563 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2024-11-13 11:28:23,563 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x707def901b40>
+2024-11-13 11:28:23,576 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json.gz
+2024-11-13 11:28:23,590 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/endpoint-rule-set-1.json.gz
+2024-11-13 11:28:23,591 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/partitions.json
+2024-11-13 11:28:23,592 - DEBUG - Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x707def77e950>
+2024-11-13 11:28:23,592 - DEBUG - Looking for endpoint for dynamodb via: environment_service
+2024-11-13 11:28:23,592 - DEBUG - Looking for endpoint for dynamodb via: environment_global
+2024-11-13 11:28:23,592 - DEBUG - Looking for endpoint for dynamodb via: config_service
+2024-11-13 11:28:23,592 - DEBUG - Looking for endpoint for dynamodb via: config_global
+2024-11-13 11:28:23,592 - DEBUG - No configured endpoint found.
+2024-11-13 11:28:23,593 - DEBUG - Setting dynamodb timeout as (60, 60)
+2024-11-13 11:28:23,595 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2024-11-13 11:28:23,596 - DEBUG - Registering retry handlers for service: dynamodb
+2024-11-13 11:28:23,596 - DEBUG - Loading dynamodb:dynamodb
+2024-11-13 11:28:23,597 - DEBUG - Event creating-resource-class.dynamodb.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x707def3fdbd0>
+2024-11-13 11:28:23,600 - DEBUG - Loading dynamodb:Table
+2024-11-13 11:28:23,602 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x707def3fdc60>
+2024-11-13 11:28:23,603 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x707def3fdbd0>
+2024-11-13 11:28:23,621 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-13 11:28:23,622 - INFO - [33mPress CTRL+C to quit[0m
+2024-11-13 11:28:23,623 - INFO -  * Restarting with stat
+2024-11-13 11:28:23,869 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-11-13 11:28:23,870 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-11-13 11:28:23,871 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-11-13 11:28:23,872 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-11-13 11:28:23,872 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-11-13 11:28:23,873 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-11-13 11:28:23,873 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-11-13 11:28:23,875 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-11-13 11:28:23,875 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-11-13 11:28:23,875 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-11-13 11:28:23,875 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-11-13 11:28:23,884 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/boto3/data/dynamodb/2012-08-10/resources-1.json
+2024-11-13 11:28:23,887 - DEBUG - IMDS ENDPOINT: http://169.254.169.254/
+2024-11-13 11:28:23,888 - DEBUG - Looking for credentials via: env
+2024-11-13 11:28:23,888 - DEBUG - Looking for credentials via: assume-role
+2024-11-13 11:28:23,888 - DEBUG - Looking for credentials via: assume-role-with-web-identity
+2024-11-13 11:28:23,889 - DEBUG - Looking for credentials via: sso
+2024-11-13 11:28:23,889 - DEBUG - Looking for credentials via: shared-credentials-file
+2024-11-13 11:28:23,889 - INFO - Found credentials in shared credentials file: ~/.aws/credentials
+2024-11-13 11:28:23,890 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2024-11-13 11:28:23,919 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2024-11-13 11:28:23,919 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x73a192ae9b40>
+2024-11-13 11:28:23,929 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json.gz
+2024-11-13 11:28:23,941 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/endpoint-rule-set-1.json.gz
+2024-11-13 11:28:23,941 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/partitions.json
+2024-11-13 11:28:23,943 - DEBUG - Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x73a19295e950>
+2024-11-13 11:28:23,943 - DEBUG - Looking for endpoint for dynamodb via: environment_service
+2024-11-13 11:28:23,943 - DEBUG - Looking for endpoint for dynamodb via: environment_global
+2024-11-13 11:28:23,943 - DEBUG - Looking for endpoint for dynamodb via: config_service
+2024-11-13 11:28:23,943 - DEBUG - Looking for endpoint for dynamodb via: config_global
+2024-11-13 11:28:23,943 - DEBUG - No configured endpoint found.
+2024-11-13 11:28:23,944 - DEBUG - Setting dynamodb timeout as (60, 60)
+2024-11-13 11:28:23,945 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2024-11-13 11:28:23,946 - DEBUG - Registering retry handlers for service: dynamodb
+2024-11-13 11:28:23,946 - DEBUG - Loading dynamodb:dynamodb
+2024-11-13 11:28:23,947 - DEBUG - Event creating-resource-class.dynamodb.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x73a1925e5c60>
+2024-11-13 11:28:23,949 - DEBUG - Loading dynamodb:Table
+2024-11-13 11:28:23,950 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x73a1925e5cf0>
+2024-11-13 11:28:23,951 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x73a1925e5c60>
+2024-11-13 11:28:23,959 - WARNING -  * Debugger is active!
+2024-11-13 11:28:24,026 - INFO -  * Debugger PIN: 425-685-083
+2024-11-13 12:17:52,533 - INFO -  * Detected change in '/home/ori/gitlab/weatherProject/app/app.py', reloading
+2024-11-13 12:17:52,627 - INFO -  * Restarting with stat
+2024-11-13 12:17:52,866 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-11-13 12:17:52,868 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-11-13 12:17:52,868 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-11-13 12:17:52,869 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-11-13 12:17:52,870 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-11-13 12:17:52,870 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-11-13 12:17:52,870 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-11-13 12:17:52,872 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-11-13 12:17:52,872 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-11-13 12:17:52,872 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-11-13 12:17:52,873 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-11-13 12:17:52,880 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/boto3/data/dynamodb/2012-08-10/resources-1.json
+2024-11-13 12:17:52,882 - DEBUG - IMDS ENDPOINT: http://169.254.169.254/
+2024-11-13 12:17:52,884 - DEBUG - Looking for credentials via: env
+2024-11-13 12:17:52,884 - DEBUG - Looking for credentials via: assume-role
+2024-11-13 12:17:52,884 - DEBUG - Looking for credentials via: assume-role-with-web-identity
+2024-11-13 12:17:52,884 - DEBUG - Looking for credentials via: sso
+2024-11-13 12:17:52,884 - DEBUG - Looking for credentials via: shared-credentials-file
+2024-11-13 12:17:52,884 - INFO - Found credentials in shared credentials file: ~/.aws/credentials
+2024-11-13 12:17:52,885 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2024-11-13 12:17:52,909 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2024-11-13 12:17:52,910 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x7cefe6249b40>
+2024-11-13 12:17:52,920 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json.gz
+2024-11-13 12:17:52,930 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/dynamodb/2012-08-10/endpoint-rule-set-1.json.gz
+2024-11-13 12:17:52,931 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/partitions.json
+2024-11-13 12:17:52,932 - DEBUG - Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x7cefe60c6950>
+2024-11-13 12:17:52,932 - DEBUG - Looking for endpoint for dynamodb via: environment_service
+2024-11-13 12:17:52,932 - DEBUG - Looking for endpoint for dynamodb via: environment_global
+2024-11-13 12:17:52,933 - DEBUG - Looking for endpoint for dynamodb via: config_service
+2024-11-13 12:17:52,933 - DEBUG - Looking for endpoint for dynamodb via: config_global
+2024-11-13 12:17:52,933 - DEBUG - No configured endpoint found.
+2024-11-13 12:17:52,934 - DEBUG - Setting dynamodb timeout as (60, 60)
+2024-11-13 12:17:52,935 - DEBUG - Loading JSON file: /home/ori/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2024-11-13 12:17:52,935 - DEBUG - Registering retry handlers for service: dynamodb
+2024-11-13 12:17:52,935 - DEBUG - Loading dynamodb:dynamodb
+2024-11-13 12:17:52,936 - DEBUG - Event creating-resource-class.dynamodb.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x7cefe5d49c60>
+2024-11-13 12:17:52,938 - DEBUG - Loading dynamodb:Table
+2024-11-13 12:17:52,939 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7cefe5d49cf0>
+2024-11-13 12:17:52,940 - DEBUG - Event creating-resource-class.dynamodb.Table: calling handler <function lazy_call.<locals>._handler at 0x7cefe5d49c60>
+2024-11-13 12:17:52,955 - WARNING -  * Debugger is active!
+2024-11-13 12:17:52,955 - INFO -  * Debugger PIN: 425-685-083
+2024-11-13 12:20:15,042 - INFO - Home page accessed
+2024-11-13 12:20:15,053 - INFO - 127.0.0.1 - - [13/Nov/2024 12:20:15] "GET / HTTP/1.1" 200 -
+2024-11-13 12:20:15,526 - INFO - 127.0.0.1 - - [13/Nov/2024 12:20:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

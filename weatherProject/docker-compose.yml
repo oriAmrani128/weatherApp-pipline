@@ -1,0 +1,13 @@
+services:
+    web:
+        build: ./app
+        image: oriamrani/weather-app
+        expose:
+            -   "8000"
+
+    nginx:
+        build: ./nginx
+        image: oriamrani/nginx
+        ports:
+            -   "80:80"
+
