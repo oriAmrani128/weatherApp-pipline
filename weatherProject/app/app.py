@@ -62,7 +62,7 @@ def results():
     country = geo_data['results'][0].get('country', 'Unknown')
     forecast_data = [{'date': day['datetime'], 'day_temp': day['tempmax'], 'night_temp': day['tempmin'], 'humidity': day['humidity']} for day in forecast]
 
-    # שמירת החיפוש בהיסטוריה
+    
     save_search_to_history(location, country)
 
     CITY_VIEW_COUNTER.labels(city=location).inc()
@@ -72,21 +72,21 @@ def results():
 
 @app.route('/save_weather_data', methods=['POST'])
 def save_weather_data():
-    """שומר נתוני מזג אוויר לקובץ JSON"""
+    
     try:
-        # קבלת נתונים מהטופס
+        
         location = request.form.get('location')
         country = request.form.get('country')
-        forecast = json.loads(request.form.get('forecast'))  # המרת המחרוזת לרשימה
+        forecast = json.loads(request.form.get('forecast')) 
 
-        # יצירת שם קובץ ייחודי
+        
         file_name = f"{location}_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
         file_path = os.path.join("saved_data", file_name)
 
-        # יצירת תיקייה אם היא לא קיימת
+      
         os.makedirs("saved_data", exist_ok=True)
 
-        # שמירת נתוני התחזית בקובץ JSON
+       
         with open(file_path, 'w') as file:
             json.dump({
                 "location": location,
@@ -103,7 +103,6 @@ def save_weather_data():
 
 @app.route('/history')
 def history():
-    """מציג את ההיסטוריה בדף אינטרנט"""
     logging.info("History page accessed")
     if os.path.exists(HISTORY_FILE):
         with open(HISTORY_FILE, 'r') as file:
@@ -118,7 +117,6 @@ def metrics():
     return Response(generate_latest(), mimetype="text/plain")
 
 def save_search_to_history(location, country):
-    """שומר את החיפושים בקובץ JSON"""
     search_data = {
         "location": location,
         "country": country,
