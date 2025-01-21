@@ -86,20 +86,20 @@ pipeline {
             agent {
                 docker {
                     image 'selenium/standalone-firefox:latest'
-                    args '--net=host --entrypoint=""'
+                     args '--net=host --entrypoint="" --user root'
                 }
             }
             steps {
                 script {
                     sh '''
-                        sudo pip3 install pytest selenium --break-system-packages
-                        sudo python3 -m pytest ./weatherProject/app/test_app_selenium.py -v --tb=short
+                         pip3 install pytest selenium 
+                         python3 -m pytest ./weatherProject/app/test_app_selenium.py -v --tb=short
                     '''
                 }
             }
         }
 
-        stage('Push To DockerHub') {
+        stage('Push To ECR') {
             
            steps {
                 script {
@@ -205,7 +205,7 @@ pipeline {
             }
         }
             }
-        }
+        } DockerHub
     }
 
     post {
