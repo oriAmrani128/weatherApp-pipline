@@ -4,14 +4,11 @@ pipeline {
     environment {
         VERSION = readFile('VERSION').trim()
         TRIVY_CACHE_DIR = "${env.WORKSPACE}/.cache"
-        SKIP_ALL = "true" 
     }
 
     stages {
         stage('Security Scan') {
-            when {
-                expression { return env.SKIP_ALL == "false" }
-            }
+           
             agent {
                 docker {
                     image 'aquasec/trivy:latest'
@@ -29,26 +26,26 @@ pipeline {
         }
 
         stage('Static Analysis') {
-            when {
-                expression { return env.SKIP_ALL == "false" }
-            }
             steps {
-                script {
-                    def scannerHome = tool 'sonarQube scanner'
-                    withSonarQubeEnv('SonarQube Server') {
-                        withCredentials([usernamePassword(credentialsId: 'sonar-credentials', usernameVariable: 'SONAR_LOGIN', passwordVariable: 'SONAR_PASSWORD')]) {
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=weather -Dsonar.sources=weatherProject/app/app.py -Dsonar.login=${SONAR_LOGIN} -Dsonar.password=${SONAR_PASSWORD}"
-                        }
-                    }
+             script {
+                 def scannerHome = tool 'sonarQube scanner' 
+                withSonarQubeEnv('SonarQube Server') { 
+                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=weather -Dsonar.sources=weatherProject/app"
+              }
+             }
+            timeout(time: 1, unit: 'MINUTES') {
+             script {
+                 def qg = waitForQualityGate()
+                 if (qg.status != 'OK') {
+                     error "Static Analysis failed: Quality Gate status is '${qg.status}'"
+                 }
                 }
             }
+         }
         }
-
         stage('Bump Version') {
             when {
-                allOf {
                     branch 'main'
-                    expression { return env.SKIP_ALL == "false" }
                 }
             }
             steps {
@@ -77,12 +74,7 @@ pipeline {
             }
         }
         stage('Selenium Tests') {
-            when {
-                allOf {
-                    branch 'main'
-                    expression { return env.SKIP_ALL == "false" }
-                }
-            }
+            
             agent {
                 docker {
                     image 'selenium/standalone-firefox:latest'
@@ -116,9 +108,7 @@ pipeline {
 
 
         stage('Sign Docker Image') {
-            when {
-                expression { return env.SKIP_ALL == "false" }
-            }
+           
             steps {
                 script {
                     withCredentials([
@@ -139,9 +129,7 @@ pipeline {
         }
 
         stage('Verify Container Image') {
-            when {
-                expression { return env.SKIP_ALL == "false" }
-            }
+           
             steps {
                 script {
                     withCredentials([
