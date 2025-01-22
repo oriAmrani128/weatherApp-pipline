@@ -99,12 +99,12 @@ resource "aws_eks_node_group" "main" {
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = data.aws_subnets.eks_subnets.ids
 
-  instance_types = [var.instance_type]
+  instance_types = var.node_instance_types
 
   scaling_config {
-    desired_size = var.desired_size
-    max_size     = var.max_size
-    min_size     = var.min_size
+   desired_size = var.node_group_scaling_config.desired_size
+    max_size     = var.node_group_scaling_config.max_size
+    min_size     = var.node_group_scaling_config.min_size
   }
 
   update_config {
