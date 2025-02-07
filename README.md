@@ -1,9 +1,5 @@
 # Weather App CI/CD Project
 
-## 🔗 Repository Links
-- **Application Repository**: [Weather App Repository](https://github.com/oriamrani/weather-Forcast-EKS)
-- **Infrastructure Repository**: [IaC Repository](https://github.com/oriamrani/weather-Forcast-EKS-iac)
-
 A comprehensive Weather Application featuring a complete CI/CD pipeline, infrastructure as code, and automated deployment system.
 
 ## 📑 Index
