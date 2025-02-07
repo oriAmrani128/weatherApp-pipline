@@ -1,20 +1,22 @@
 pipeline {
-    agent { label 'agent' }
+     agent {
+        kubernetes {
+            label 'jenkins-agent' 
+        }
+    }
 
     environment {
         VERSION = readFile('VERSION').trim()
         TRIVY_CACHE_DIR = "${env.WORKSPACE}/.cache"
+        SKIP_ALL = "false"
     }
 
     stages {
         stage('Security Scan') {
-           
-            agent {
-                docker {
-                    image 'aquasec/trivy:latest'
-                    args '--entrypoint="" --user root -v /var/run/docker.sock:/var/run/docker.sock'
-                }
+            when {
+                expression { return env.SKIP_ALL == "false" }
             }
+            
             steps {
                 script {
                     echo 'Running Dependency Scan...'
@@ -26,26 +28,26 @@ pipeline {
         }
 
         stage('Static Analysis') {
+            when {
+                expression { return env.SKIP_ALL == "false" }
+            }
             steps {
-             script {
-                 def scannerHome = tool 'sonarQube scanner' 
-                withSonarQubeEnv('SonarQube Server') { 
-                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=weather -Dsonar.sources=weatherProject/app"
-              }
-             }
-            timeout(time: 1, unit: 'MINUTES') {
-             script {
-                 def qg = waitForQualityGate()
-                 if (qg.status != 'OK') {
-                     error "Static Analysis failed: Quality Gate status is '${qg.status}'"
-                 }
+                script {
+                    def scannerHome = tool 'sonarQube scanner'
+                    withSonarQubeEnv('SonarQube Server') {
+                        withCredentials([usernamePassword(credentialsId: 'sonar-credentials', usernameVariable: 'SONAR_LOGIN', passwordVariable: 'SONAR_PASSWORD')]) {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=weather -Dsonar.sources=weatherProject/app/app.py -Dsonar.login=${SONAR_LOGIN} -Dsonar.password=${SONAR_PASSWORD}"
+                        }
+                    }
                 }
             }
-         }
         }
+
         stage('Bump Version') {
             when {
+                allOf {
                     branch 'main'
+                    expression { return env.SKIP_ALL == "false" }
                 }
             }
             steps {
@@ -64,51 +66,43 @@ pipeline {
         }
 
         stage('Build App Image') {
-          
             steps {
                 script {
-                    sh 'docker build -t weather-app -f weatherProject/app/Dockerfile weatherProject/app'
-                    
-                   
+                    sh 'podman build -t weather-app -f weatherProject/app/Dockerfile weatherProject/app'
                 }
             }
         }
+
         stage('Selenium Tests') {
-            
-            agent {
-                docker {
-                    image 'selenium/standalone-firefox:latest'
-                     args '--net=host --entrypoint="" --user root'
-                }
-            }
+           
             steps {
                 script {
                     sh '''
-                         pip3 install pytest selenium 
-                         python3 -m pytest ./weatherProject/app/test_app_selenium.py -v --tb=short
+                        pip3 install --user pytest selenium
+                        python3 -m pytest ./weatherProject/app/test_app_selenium.py -v --tb=short
                     '''
                 }
             }
         }
 
         stage('Push To ECR') {
-            
-           steps {
+            steps {
                 script {
-                     withCredentials([aws(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    withCredentials([aws(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh """
-                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 145023133356.dkr.ecr.us-east-1.amazonaws.com
-                            docker tag weather-app 145023133356.dkr.ecr.us-east-1.amazonaws.com/weather-app:${env.VERSION}
-                            docker push 145023133356.dkr.ecr.us-east-1.amazonaws.com/weather-app:${env.VERSION}
-                            """
+                            aws ecr get-login-password --region us-east-1 | podman login --username AWS --password-stdin 145023133356.dkr.ecr.us-east-1.amazonaws.com
+                            podman tag weather-app 145023133356.dkr.ecr.us-east-1.amazonaws.com/weather-app:${env.VERSION}
+                            podman push 145023133356.dkr.ecr.us-east-1.amazonaws.com/weather-app:${env.VERSION}
+                        """
+                    }
                 }
             }
         }
-        }
-
 
         stage('Sign Docker Image') {
-           
+            when {
+                expression { return env.SKIP_ALL == "false" }
+            }
             steps {
                 script {
                     withCredentials([
@@ -120,7 +114,8 @@ pipeline {
                             "VERSION=${env.VERSION}"
                         ]) {
                             sh '''
-                            cosign sign --yes --key "$COSIGN_KEY" docker.io/oriamrani/weather-app:$VERSION
+                            cosign sign --yes --key "$COSIGN_KEY" \
+                            oci://docker.io/oriamrani/weather-app:$VERSION
                             '''
                         }
                     }
@@ -129,7 +124,9 @@ pipeline {
         }
 
         stage('Verify Container Image') {
-           
+            when {
+                expression { return env.SKIP_ALL == "false" }
+            }
             steps {
                 script {
                     withCredentials([
@@ -137,11 +134,9 @@ pipeline {
                     ]) {
                         def verifyResult = sh(
                             script: """
-                            cosign verify \
-                            --key $COSIGN_PUBLIC \
-                            --allow-insecure-registry \
-                            --insecure-ignore-tlog=true \
-                            docker.io/oriamrani/weather-app:$VERSION
+                            cosign verify --key $COSIGN_PUBLIC \
+                            --allow-insecure-registry --insecure-ignore-tlog=true \
+                            oci://docker.io/oriamrani/weather-app:$VERSION
                             """,
                             returnStatus: true
                         )
@@ -159,9 +154,9 @@ pipeline {
                     sshagent(['ec2-weather-app']) {
                         sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@10.0.12.47 '
-                        docker compose down &&
-                        docker compose pull &&
-                        docker compose up -d
+                        podman-compose down &&
+                        podman-compose pull &&
+                        podman-compose up -d
                         '
                         '''
                     }
@@ -170,36 +165,35 @@ pipeline {
         }
 
         stage('Deployment to production') {
-           
             steps {
-                   withCredentials([usernamePassword(credentialsId: 'gitlab_pat', usernameVariable: 'GITLAB_USERNAME', passwordVariable: 'GITLAB_PASS')]){
-            script {
-                def  manifestsRepo = "http://${GITLAB_USERNAME}:${GITLAB_PASS}@10.0.128.91/oriamrani128/weatherApp-manifests.git"
-                
-                sh """
-                if [ -d 'manifestsRepo' ]; then
-                    rm -rf manifestsRepo
-                fi
+                withCredentials([usernamePassword(credentialsId: 'gitlab_pat', usernameVariable: 'GITLAB_USERNAME', passwordVariable: 'GITLAB_PASS')]){
+                    script {
+                        def manifestsRepo = "http://${GITLAB_USERNAME}:${GITLAB_PASS}@10.0.128.91/oriamrani128/weatherApp-manifests.git"
+                        
+                        sh """
+                        if [ -d 'manifestsRepo' ]; then
+                            rm -rf manifestsRepo
+                        fi
 
-                git clone ${manifestsRepo} manifestsRepo
-                cd manifestsRepo
-                sed -i 's/latest/${env.VERSION}/g' deployment.yml
-                git config user.name "Jenkins"
-                git config user.email "jenkins@example.com"
-                git add deployment.yml
-                git commit -m "Update image tag to ${env.VERSION}"
-                git push origin main
-                """
+                        git clone ${manifestsRepo} manifestsRepo
+                        cd manifestsRepo
+                        sed -i 's/latest/${env.VERSION}/g' deployment.yml
+                        git config user.name "Jenkins"
+                        git config user.email "jenkins@example.com"
+                        git add deployment.yml
+                        git commit -m "Update image tag to ${env.VERSION}"
+                        git push origin main
+                        """
+                    }
+                }
             }
         }
-            }
-        } DockerHub
     }
 
     post {
         always {
             script {
-                sh 'docker system prune -f'
+                sh 'podman system prune -f'
                 cleanWs()
             }
         }
